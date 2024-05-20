@@ -1,7 +1,7 @@
 "use strict";
 
 import express, { NextFunction, Request, Response, urlencoded } from "express";
-import PORT from "./config";
+import { PORT } from "./config";
 import router from "./routes";
 
 const app = express();

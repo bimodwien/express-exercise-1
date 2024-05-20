@@ -4,4 +4,6 @@ import "dotenv/config";
 
 const PORT = process.env.PORT || 8000;
 
-export default PORT;
+const SECRET_KEY = process.env.SECRET_KEY || "";
+
+export { PORT, SECRET_KEY };
