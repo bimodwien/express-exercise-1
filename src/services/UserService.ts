@@ -1,7 +1,7 @@
 "use strict";
 
 import { Request } from "express";
-import prisma from "../lib";
+import prisma from "../lib/prisma";
 import { user } from "../models/user";
 
 class UserService {
