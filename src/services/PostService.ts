@@ -52,7 +52,19 @@ class PostService {
 
   static async updatePost(req: Request) {
     const id = req.params.id;
+    const user_id = req.user.id;
     const data: Prisma.PostCreateInput = { ...req.body };
+
+    const post = await prisma.post.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    if (!post) throw new Error("Post Not Found");
+    if (post.userId != user_id)
+      throw new Error("This User Cannot Edit This Post");
+
     return await prisma.post.update({
       data,
       where: {
@@ -62,7 +74,19 @@ class PostService {
   }
 
   static async deletePost(req: Request) {
+    const user_id = req.user.id;
     const id = req.params.id;
+
+    const post = await prisma.post.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    if (!post) throw new Error("Post Not Found");
+    if (post.userId != user_id)
+      throw new Error("This User Cannot Delete This Post");
+
     return await prisma.post.delete({
       where: {
         id: Number(id),
