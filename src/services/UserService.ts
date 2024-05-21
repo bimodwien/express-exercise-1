@@ -15,6 +15,7 @@ class UserService {
         username: String(username),
       },
       select: {
+        id: true,
         username: true,
         email: true,
         password: true,
@@ -28,6 +29,8 @@ class UserService {
       throw new Error("Wrong Password");
     }
     delete user.password;
+    // console.log(user);
+
     return createToken(user, "1h");
   }
 

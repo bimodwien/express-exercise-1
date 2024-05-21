@@ -1,13 +1,15 @@
 "use strict";
 
 import express, { NextFunction, Request, Response, urlencoded } from "express";
-import { PORT } from "./config";
+import cors from "cors";
+import { PORT, corsOption } from "./config";
 import router from "./routes";
 
 const app = express();
 
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
+app.use(cors(corsOption));
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to API");
